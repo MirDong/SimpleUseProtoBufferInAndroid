@@ -1,0 +1,19 @@
+//声明语法为proto2或proto3  option是可选的，required是必要的
+syntax = "proto3";
+//声明pb文件所在的包，避免出现相同数据结构名，造成冲突
+package student.proto;
+//proto文件编译后生成的java文件存放的包名(存放路径com/dzk/proto)，与package不同
+option java_package = "com.dzk.proto";
+//外界使用时，可以引用的类名，类似于别名，默认情况下会生成XXOuterClass,以本例来看，不声明java_outer_classname时，会生成StudentOuterClass.java,以便外界使用
+option java_outer_classname = "StudentPB";
+/**
+message 相当于class
+常用的类型有int32,float,string,bool,bytes
+ */
+message Student {
+  string name = 1;
+  int32 age = 2;
+  //repeated 修饰表示为数组，可以存多个数据
+  repeated int32 num = 3 [packed = true];//packed为字节对齐
+}
+
